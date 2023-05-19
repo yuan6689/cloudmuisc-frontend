@@ -19,13 +19,25 @@
       </svg>
     </div>
     <audio @ended="changeBtn(false)" ref="audio" :src="musicSrc"></audio>
-    <van-popup v-model:show="isDetailShow" position="bottom" :style="{ height: '10%', width: '100%' }" />
+    <van-popup
+      v-model:show="isDetailShow"
+      position="bottom"
+      :style="{ height: '100%', width: '100%' }"
+    >
+  <music-detail
+    :musicList="playNow"
+    :play="play"
+    :pause="pause"
+    :isBtnShow="isBtnShow"
+  />
+  </van-popup>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import { getPlayMusic } from "@/request/api/itemMusic";
+import MusicDetail from "@/components/Item/MusicDetail.vue"
 
 export default {
   data() {
@@ -33,6 +45,10 @@ export default {
       musicSrc: "https://music.163.com/song/media/outer/url?id=1934251776.mp3",
     };
   },
+  components: {
+    MusicDetail,
+  }
+  ,
   computed: {
     ...mapState([
       "playlist",
@@ -58,7 +74,7 @@ export default {
     changeBtn(value) {
       this.$store.commit("changeBtnShow", value);
     },
-    changePopupShow(value){
+    changePopupShow(value) {
       this.$store.commit("updateIsDetailShow", value);
     },
     async getMusicSrc() {

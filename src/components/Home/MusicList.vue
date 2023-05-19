@@ -66,7 +66,7 @@
         // margin-right: 0.14rem;
         padding-right: 0.2rem;
         width: 2.2rem;
-        height: 3.8rem;
+        height: 3.14rem;
 
         position: relative;
 

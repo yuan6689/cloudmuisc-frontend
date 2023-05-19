@@ -29,7 +29,10 @@ export default createStore({
     playlistIndex: 0, //默认下标为0
     isBtnShow: false,
     playingId: 89039055,
-    isDetailShow: false
+    isDetailShow: true,
+    lyricList: [],
+    currentTime: 0,
+    duration: 0,
   },
   getters: {},
   mutations: {
@@ -47,7 +50,16 @@ export default createStore({
     },
     updateIsDetailShow(state, value) {
       state.isDetailShow = value;
-    }
+    },
+    updateLyricList(state, value){
+      state.lyricList = value;
+    },
+    updateCurrentTime(state, value){
+      state.currentTime = value;
+    },
+    updateDuration(state, value){
+      state.duration = value;
+    },
   },
   actions: {},
   modules: {},

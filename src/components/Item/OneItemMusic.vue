@@ -38,7 +38,7 @@ const changeCount = function (num) {
   .play-count {
     position: absolute;
     right: 0.24rem;
-    z-index: 100;
+    z-index: 0;
     color: rgba(255, 255, 255, 0.821);
     padding-top: 0.05rem;
     text-align: center;
