@@ -161,7 +161,7 @@ const getCreator = computed(() => {
     .item-info {
       display: inline-block;
       width: 95%;
-      height: 0.7rem;
+      height: 0.65rem;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;

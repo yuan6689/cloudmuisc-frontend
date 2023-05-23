@@ -11,7 +11,7 @@
     </div>
 
     <div class="top-right">
-      <svg class="icon" aria-hidden="true">
+      <svg class="icon" aria-hidden="true" @click="$router.push('/search')">
         <use xlink:href="#icon-cloudsearch"></use>
       </svg>
     </div>

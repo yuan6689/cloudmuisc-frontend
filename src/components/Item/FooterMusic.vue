@@ -18,26 +18,34 @@
         <use xlink:href="#icon-cloud24gf-playlistMusic"></use>
       </svg>
     </div>
-    <audio @ended="changeBtn(false)" ref="audio" :src="musicSrc"></audio>
+    <audio
+      @timeupdate="handlePlaying"
+      @ended="changeBtn(false)"
+      ref="audio"
+      :src="musicSrc"
+      @durationchange="handleDurationchange"
+    ></audio>
     <van-popup
       v-model:show="isDetailShow"
       position="bottom"
       :style="{ height: '100%', width: '100%' }"
     >
-  <music-detail
-    :musicList="playNow"
-    :play="play"
-    :pause="pause"
-    :isBtnShow="isBtnShow"
-  />
-  </van-popup>
+      <music-detail
+        :musicList="playNow"
+        :play="play"
+        :pause="pause"
+        :isBtnShow="isBtnShow"
+        @emit-update-time="emitUpdateTime"
+      />
+    </van-popup>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 import { getPlayMusic } from "@/request/api/itemMusic";
-import MusicDetail from "@/components/Item/MusicDetail.vue"
+import MusicDetail from "@/components/Item/MusicDetail.vue";
+import "vant/es/toast/style";
 
 export default {
   data() {
@@ -47,8 +55,7 @@ export default {
   },
   components: {
     MusicDetail,
-  }
-  ,
+  },
   computed: {
     ...mapState([
       "playlist",
@@ -77,22 +84,57 @@ export default {
     changePopupShow(value) {
       this.$store.commit("updateIsDetailShow", value);
     },
-    async getMusicSrc() {
+    async getMusicImgSrc() {
       const { data } = await getPlayMusic(this.playingId);
-      console.log(data);
+      // console.log(data);
       this.musicSrc = data.data[0].url;
     },
+    handleDurationchange(event){
+      this.updateDuration(event.target.duration)
+    },
+    goPlay(to) {
+      let res = this.playlistIndex;
+      res += to;
+      if (res > this.playlist.length) {
+        console.log("the last song");
+        Toast("已经是列表最后一首");
+      } else if (res < 0) {
+        console.log("the first song");
+        Toast("已经是列表第一首");
+      } else {
+        this.updatePlaylistIndex(res);
+      }
+    },
+    handleEnded() {
+      this.changeBtn(false);
+      this.goPlay(1);
+    },
+    handlePlaying(e) {
+      this.updateCurrentTime(e.target.currentTime);
+    },
+    emitUpdateTime(newValue) {
+      this.$refs.audio.currentTime = newValue;
+      if (this.$refs.audio.paused) {
+        this.play();
+      }
+    },
+    ...mapMutations([
+      "updateCurrentTime",
+      "updateDuration",
+      "updatePlaylistIndex",
+    ]),
+    ...mapActions(["getLyricList"]),
   },
   updated() {
     console.log(this.$refs.audio);
   },
-  // async mounted() {
-  //   console.log('loading')
-  //   await this.getMusicSrc();
-  // },
+  mounted() {
+    this.$refs.audio.preload = "auto";
+  },
   watch: {
     async playingId() {
-      await this.getMusicSrc();
+      await this.getMusicImgSrc();
+      await this.getLyricList();
       this.play();
     },
   },
@@ -132,7 +174,7 @@ export default {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 5rem;
+      max-width: 4rem;
     }
     .music-words {
       color: #ccc;

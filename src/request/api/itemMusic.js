@@ -21,4 +21,11 @@ function getPlayMusic(id) {
   })
 }
 
-export { getItemMusicInfo, getItemMusicList, getPlayMusic };
+function getMusicLyric(id) {
+  return service({
+    method: "get",
+    url: `/lyric?id=${id}`
+  })
+}
+
+export { getItemMusicInfo, getItemMusicList, getPlayMusic, getMusicLyric };

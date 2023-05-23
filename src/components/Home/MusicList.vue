@@ -89,7 +89,7 @@
         // }
         .name {
           font-size: .24rem;
-          height: .72rem;
+          height: .7rem;
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
