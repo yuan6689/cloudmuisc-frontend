@@ -5,6 +5,15 @@
 </template>
 
 <style lang="less">
+:root:root {
+  --van-dialog-width: 6.4rem;
+  --van-dialog-font-size: 0.4rem;
+  --van-dialog-message-font-size: 0.3rem;
+  --van-button-default-font-size: .3rem;
+  --van-dialog-header-line-height: .7rem;
+  --van-dialog-message-line-height: .6rem;
+  --van-dialog-button-height: .7rem;
+}
 .icon {
   width: 0.5rem;
   height: 0.5rem;

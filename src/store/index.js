@@ -68,7 +68,7 @@ export default createStore({
     playlistIndex: 0, //默认下标为0
     isBtnShow: false,
     playingId: 1995162601,
-    isDetailShow: true,
+    isDetailShow: false,
     lyricList: {
       version: 6,
       lyric:
@@ -84,6 +84,9 @@ export default createStore({
     },
     updatePlaylist(state, playlistNew) {
       state.playlist = playlistNew;
+    },
+    pushPlayList(state, value){
+      state.playlist.push(value);
     },
     updatePlaylistIndex(state, value) {
       state.playlistIndex = value;

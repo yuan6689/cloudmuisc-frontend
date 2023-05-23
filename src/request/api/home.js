@@ -14,4 +14,11 @@ function getMusicList(){
   })
 }
 
-export { getBanner, getMusicList };
+function getSearchMusic(data){
+  return service({
+    method: "get",
+    url: `/search?keywords=${data}`
+  })
+}
+
+export { getBanner, getMusicList, getSearchMusic };

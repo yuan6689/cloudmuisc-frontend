@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="music-list-wrapper">
-      <div class="item" v-for="(item, index) in itemList" key="index">
+      <div class="item" v-for="(item, index) in itemList" :key="index">
         <div class="left-wrapper" @click="playMusic(index, item.id)">
           <span class="song-number">{{ index + 1 }}</span>
           <div class="song-name-author">
@@ -31,7 +31,7 @@
             <use xlink:href="#icon-cloud24gl-playSquare"></use>
           </svg>
           <svg class="icon list" aria-hidden="true">
-            <use xlink:href="#icon-cloudliebiao2"></use>
+            <use xlink:href="#icon-cloudliebiao2"></use>ÍÍÍ
           </svg>
         </div>
       </div>
