@@ -2,7 +2,7 @@
   <div class="search-top">
     <div class="top-search">
       <svg
-        @click="$router.back()"
+        @click="$router.go(-1)"
         t="1684831495331"
         class="icon"
         viewBox="0 0 1024 1024"
@@ -113,7 +113,7 @@ const handleSearch = function () {
     state.historyList.splice(ifFound, 1);
   }
   state.historyList.unshift(inputValue.value.value);
-  inputValue.value.value = "";
+  // inputValue.value.value = "";
   emit("search-occur", state.historyList[0]);
 };
 
@@ -135,8 +135,8 @@ const handleItemClick = (e) =>{
 }
 
 onMounted(() => {
-  // console.log(localStorage.getItem("historyList") || []);
-  state.historyList = JSON.parse(localStorage.getItem("historyList") || []);
+  // console.log(localStorage.getItem("historyList") || "[]");
+  state.historyList = JSON.parse(localStorage.getItem("historyList") || "[]");
 });
 
 onUnmounted(() => {
@@ -178,7 +178,7 @@ onUnmounted(() => {
       align-items: center;
       margin-left: 0.2rem;
       margin-right: auto;
-      ::-webkit-scrollbar {
+      &::-webkit-scrollbar {
         display: none; /* Chrome Safari */
       }
       .history-item {

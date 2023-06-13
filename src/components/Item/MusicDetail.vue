@@ -167,7 +167,7 @@
           p-id="3061"
           width="200"
           height="200"
-          @click="goPlay(-1)"
+          @click="() => $emit('go-play', -1)"
         >
           <path
             d="M98.31 483.06L654.05 162.2c22.43-12.95 50.47 3.24 50.47 29.14v641.71c0 25.9-28.04 42.09-50.47 29.14L98.31 541.34c-22.43-12.95-22.43-45.33 0-58.28z"
@@ -198,7 +198,7 @@
           p-id="3214"
           width="200"
           height="200"
-          @click="goPlay(1)"
+          @click="() => $emit('go-play', 1)"
         >
           <path
             d="M925.61 483.06L369.88 162.21c-22.43-12.95-50.47 3.24-50.47 29.14v641.71c0 25.9 28.04 42.09 50.47 29.14l555.74-320.86c22.43-12.95 22.43-45.33-0.01-58.28z"
@@ -307,7 +307,7 @@
       left: 3.55rem;
       transform-origin: 0.32rem 0.32rem;
       transform: rotate(-22deg);
-      transition: all 2s;
+      transition: all 1s;
       z-index: 2;
       &.active {
         transform: rotate(3deg);
@@ -426,6 +426,7 @@
 import MyMarquee from "./MyMarquee.vue";
 import { mapState, mapMutations } from "vuex";
 import 'vant/es/toast/style';
+import { showToast } from 'vant';
 // import switchMusic from "@/plugin/myPlugins/switchMusic"
 export default {
   data() {
@@ -479,28 +480,6 @@ export default {
     }
   },
   methods: {
-    // UNKONW: 不知道为啥这里不起作用
-    // getLyricClass: function (item, index) {
-    //   // 
-    //   if (
-    //     item.totalTime < this.currentTime &&
-    //     item.totalTime < this.lyricArr.at(index + 1).totalTime
-    //   ) {
-    //     return "active item-lyric";
-    //   }
-    //   return "item-lyric";
-    // },
-    goPlay(to){
-      let res = this.playlistIndex;
-          res += to;
-        if(res > this.playlist.length){
-          Toast("已经是列表最后一首")
-        } else if(res < 0) {
-          Toast("已经是列表第一首")
-        } else {
-          this.updatePlaylistIndex(res);
-        }
-    },
     ...mapMutations(["updateIsDetailShow","updatePlaylistIndex","updateCurrentTime"]),
   },
   watch: {
@@ -515,7 +494,7 @@ export default {
     }
   },
   props: ["musicList", "isBtnShow", "play", "pause"],
-  emits: ["emit-update-time"],
+  emits: ["emit-update-time", "go-play"],
   components: {
     MyMarquee,
   },

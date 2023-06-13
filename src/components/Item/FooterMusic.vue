@@ -36,6 +36,7 @@
         :pause="pause"
         :isBtnShow="isBtnShow"
         @emit-update-time="emitUpdateTime"
+        @go-play="goPlay"
       />
     </van-popup>
   </div>
@@ -44,6 +45,7 @@
 <script>
 import { mapState, mapMutations, mapActions } from "vuex";
 import { getPlayMusic } from "@/request/api/itemMusic";
+import { showToast } from 'vant';
 import MusicDetail from "@/components/Item/MusicDetail.vue";
 import "vant/es/toast/style";
 
@@ -94,13 +96,14 @@ export default {
     },
     goPlay(to) {
       let res = this.playlistIndex;
+      console.log(res);
       res += to;
-      if (res > this.playlist.length) {
+      if (res >= this.playlist.length) {
         console.log("the last song");
-        Toast("已经是列表最后一首");
+        showToast("已经是列表最后一首");
       } else if (res < 0) {
         console.log("the first song");
-        Toast("已经是列表第一首");
+        showToast("已经是列表第一首");
       } else {
         this.updatePlaylistIndex(res);
       }
@@ -124,9 +127,6 @@ export default {
       "updatePlaylistIndex",
     ]),
     ...mapActions(["getLyricList"]),
-  },
-  updated() {
-    console.log(this.$refs.audio);
   },
   mounted() {
     this.$refs.audio.preload = "auto";

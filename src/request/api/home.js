@@ -1,24 +1,38 @@
-import service from ".."
+import service from "..";
 
-function getBanner(){
+function getBanner() {
   return service({
     method: "get",
-    url: "banner?type=2"
+    url: "banner?type=2",
   });
 }
 
-function getMusicList(){
+function getMusicList() {
   return service({
     method: "get",
-    url: "personalized?limit=5"
-  })
+    url: "personalized?limit=5",
+  });
 }
 
-function getSearchMusic(data){
+function getSearchMusic(data) {
   return service({
     method: "get",
-    url: `/search?keywords=${data}`
-  })
+    url: `/search?keywords=${data}`,
+  });
 }
 
-export { getBanner, getMusicList, getSearchMusic };
+function getSearchItemMusic(data) {
+  return service({
+    method: "get",
+    url: `/album?id=${data}`,
+  });
+}
+
+
+
+export {
+  getBanner,
+  getMusicList,
+  getSearchMusic,
+  getSearchItemMusic,
+};

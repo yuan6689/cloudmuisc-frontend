@@ -1,7 +1,13 @@
 <template>
   <div class="music-list">
-    <div class="item" v-for="(item, index) in musicList" :key="index">
-      <div class="left-wrapper" @click="handleClick(item, index)">
+    <div class="please-search promot">请在输入框输入然后开始搜索</div>
+    <div
+      class="item"
+      v-for="(item, index) in musicList"
+      :key="index"
+      @click="handleClick(item.album.id)"
+    >
+      <div class="left-wrapper">
         <span class="song-number">{{ index + 1 }}</span>
         <div class="song-name-author">
           <span class="name">{{ item.name }}</span>
@@ -21,20 +27,21 @@
         </svg>
       </div>
     </div>
+    <div class="search-no-res">未能搜索到结果,请重新输入并搜索</div>
   </div>
 </template>
 
 <script setup>
-import {useStore} from "vuex"
+import { useStore } from "vuex";
+import { getSearchItemMusic } from "@/request/api/home";
 const props = defineProps(["musicList"]);
 const store = useStore();
 
 //TODO: 点击播放的功能
-const handleClick = function(){
-  const items = {
-
-  }
-}
+const handleClick = async function (id) {
+  console.log(id);
+  const { data } = await getSearchItemMusic(id);
+};
 </script>
 
 <style lang="less" scoped>

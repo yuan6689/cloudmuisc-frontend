@@ -7,7 +7,10 @@
     </div>
 
     <div class="top-content">
-      <span>我的</span><span class="active">发现</span><span>云村</span><span>视频</span>
+      <router-link to="/main/mine" active-class="active">我的</router-link>
+      <router-link to="/main/home" active-class="active">发现</router-link>
+      <!-- <router-link to="/main" active-class="active">云村</router-link>
+      <router-link to="/main" active-class="active">视频</router-link> -->
     </div>
 
     <div class="top-right">

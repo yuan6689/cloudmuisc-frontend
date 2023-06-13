@@ -76,6 +76,8 @@ export default createStore({
     },
     currentTime: 0,
     duration: 0,
+    isLogin: false,
+    isFooterShow: true,
   },
   getters: {},
   mutations: {
@@ -105,6 +107,12 @@ export default createStore({
     },
     updateDuration(state, value) {
       state.duration = value;
+    },
+    updateIsFooterShow(state, value) {
+      state.isFooterShow = value;
+    },
+    updateIsLogin(state, value) {
+      state.isLogin = value;
     },
   },
   actions: {

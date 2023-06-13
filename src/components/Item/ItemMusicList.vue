@@ -31,7 +31,7 @@
             <use xlink:href="#icon-cloud24gl-playSquare"></use>
           </svg>
           <svg class="icon list" aria-hidden="true">
-            <use xlink:href="#icon-cloudliebiao2"></use>ÍÍÍ
+            <use xlink:href="#icon-cloudliebiao2"></use>
           </svg>
         </div>
       </div>
@@ -156,14 +156,17 @@
 import { mapMutations, useStore } from "vuex";
 const store = useStore();
 //KNOW: 这里 需要对 mutations 进行绑定, 不绑定 显示 this is undefined can't access "$store"
-const mutations = mapMutations(["updatePlaylist", "updatePlaylistIndex", "updatePlayingId"]);
+const mutations = mapMutations([
+  "updatePlaylist",
+  "updatePlaylistIndex",
+  "updatePlayingId",
+]);
 const newMutations = {};
 Object.keys(mutations).forEach((key) => {
   newMutations[key] = mutations[key].bind({ $store: store });
 });
 
 const { updatePlaylist, updatePlaylistIndex, updatePlayingId } = newMutations;
-
 
 const props = defineProps({
   subCount: Number,
@@ -173,7 +176,7 @@ const props = defineProps({
 const playMusic = function (index, id) {
   updatePlaylist(props.itemList);
   updatePlaylistIndex(index);
-  updatePlayingId(id)
+  updatePlayingId(id);
 };
 
 const changeCount = function (num) {

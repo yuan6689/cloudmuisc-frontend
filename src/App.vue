@@ -1,7 +1,7 @@
 <template>
   <router-view />
-  <div class="placeholder"></div>
-  <FooterMusic />
+  <div class="placeholder" v-show="$store.state.isFooterShow"></div>
+  <FooterMusic v-show="$store.state.isFooterShow"/>
 </template>
 
 <style lang="less">
@@ -9,10 +9,14 @@
   --van-dialog-width: 6.4rem;
   --van-dialog-font-size: 0.4rem;
   --van-dialog-message-font-size: 0.3rem;
-  --van-button-default-font-size: .3rem;
-  --van-dialog-header-line-height: .7rem;
-  --van-dialog-message-line-height: .6rem;
-  --van-dialog-button-height: .7rem;
+  --van-button-default-font-size: 0.3rem;
+  --van-dialog-header-line-height: 0.7rem;
+  --van-dialog-message-line-height: 0.6rem;
+  --van-dialog-button-height: 0.7rem;
+
+  --van-toast-font-size: 0.3rem;
+  --van-toast-line-height: 0.7rem;
+  --van-toast-text-padding: 0.3rem;
 }
 .icon {
   width: 0.5rem;

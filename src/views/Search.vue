@@ -18,7 +18,11 @@ const state = reactive({
 
 const handleSearch = async (input) => {
   const {data} = await getSearchMusic(input);
-  state.songs = data.result.songs;
+  if(data.result.songCount === 0){
+    
+  }else{
+    state.songs = data.result.songs;
+  }
 }
 </script>
 
